@@ -63,3 +63,61 @@ Check it against every constraint:
 A single missed constraint makes a confident-looking answer wrong. On tasks with several
 constraints and a real objective, raise the effort - and always verify the answer against
 the constraints yourself, whatever effort produced it.
+
+---
+
+## Extended version (harder - 6 of 16, with dependencies)
+
+A tougher alternative: more campaigns, an exact-count constraint, and if-then dependencies,
+so low effort trips far more often. Verified by brute force - the answer below is the
+**global optimum**.
+
+### The prompt (paste as-is)
+
+```
+You are planning a marketing portfolio. Select exactly six campaigns.
+
+Constraints:
+- Total spend must be $82K or less
+- Total reach must be at least 2.15M
+- Select at least three B2B and at least two B2C campaigns
+- Use no channel more than twice
+- Select exactly one Experimental campaign
+- Campaigns B and L cannot both be selected
+- If campaign J is selected, campaign H must also be selected
+- If campaign P is selected, campaign C must also be selected
+
+Objective: 1) maximize qualified leads; 2) if tied, maximize reach; 3) if still tied, minimize spend.
+Return only: {"campaign_ids":["..."],"spend_k":0,"reach_k":0,"qualified_leads":0}
+
+ID | Spend($K) | Reach(K) | Leads | Audience | Channel | Type
+A 11 310 34 B2B Search Core        I 10 280 35 B2C Webinar Experimental
+B 15 440 51 B2C Social Core        J 16 460 56 B2C Video Core
+C  8 240 31 B2B Email Core         K  7 190 26 B2B Email Core
+D 17 490 59 B2C Video Core         L 18 510 61 B2C Social Core
+E 13 360 43 B2B Social Core        M 11 340 44 B2B Search Experimental
+F 14 400 48 B2C Search Core        N 15 420 50 B2C Webinar Core
+G  9 220 28 B2B Webinar Experimental O 12 350 41 B2B Social Core
+H 12 330 40 B2B Email Core         P 19 540 65 B2C Video Experimental
+```
+
+### Correct answer (global optimum)
+
+```
+{"campaign_ids":["C","D","H","J","L","M"],"spend_k":82,"reach_k":2370,"qualified_leads":291}
+```
+
+- **Count:** 6 ✓  ·  **Spend:** 8+17+12+16+18+11 = 82 (&le;82) ✓  ·  **Reach:** 240+490+330+460+510+340 = 2370 (&ge;2150) ✓
+- **B2B:** C,H,M = 3 (&ge;3) ✓  ·  **B2C:** D,J,L = 3 (&ge;2) ✓
+- **Channels:** Email C,H x2; Video D,J x2; Social L x1; Search M x1 - none over twice ✓
+- **Experimental:** M only = exactly 1 ✓
+- **Deps:** J in and H in ✓ · B not selected, so not with L ✓ · P not selected ✓
+- **Leads:** 31+59+40+56+61+44 = 291 - the maximum that satisfies every constraint ✓
+
+### How to run it
+
+1. `/effort low`, paste, note whether the answer satisfies **every** constraint.
+2. Fresh chat, `/effort high`, paste the same prompt.
+3. Compare: did low break something - over **$82K**, a channel 3x, not exactly one
+   Experimental, or a violated dependency - or score **under 291**? Did high hit 291 and
+   stay legal? The dependencies are where low effort fails most.
