@@ -63,7 +63,6 @@ Common mistake: a *procedure* pushed into AGENTS.md - it burns tokens every turn
   ```toml
   [agents]
   max_threads = 6
-  max_depth   = 1          # children yes, grandchildren no
   [agents.reviewer]
   config_file = "./agents/reviewer.toml"
   ```
@@ -75,8 +74,8 @@ Common mistake: a *procedure* pushed into AGENTS.md - it burns tokens every turn
 | Codex | Devin | what |
 |---|---|---|
 | `/init` | (Devin plans on its own) | scaffold / plan the work |
-| `/skills` | plugin / skills settings | list loaded skills |
-| `$<name>` | `$<name>` | call a skill explicitly |
+| `/plugins` | plugin / skills settings | list loaded skills |
+| `/<name>` | `/<name>` | call a skill explicitly |
 | `codex mcp add / list` · `/mcp` | MCP marketplace / settings | connect MCP, see reach |
 | `/model` | (depth via the plan) | reasoning effort |
 | `/status` | `/status` | tokens + what's loaded |
