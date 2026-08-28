@@ -54,8 +54,8 @@ Check it against every constraint:
 
 ## How to run it
 
-1. Set low effort (`/effort low` in Codex, or the tool's setting). Paste the prompt. Note the answer and whether it satisfies every constraint.
-2. Fresh chat. Set high effort (`/effort high`). Paste the same prompt.
+1. Set low effort (`/model` in Codex, or the tool's setting). Paste the prompt. Note the answer and whether it satisfies every constraint.
+2. Fresh chat. Set high effort (`/model`). Paste the same prompt.
 3. Compare: did low effort break a constraint (over $65K, a channel three times) or return fewer than 246 leads? Did high effort reach 246 and stay legal?
 
 ## The takeaway
@@ -116,8 +116,8 @@ H 12 330 40 B2B Email Core         P 19 540 65 B2C Video Experimental
 
 ### How to run it
 
-1. `/effort low`, paste, note whether the answer satisfies **every** constraint.
-2. Fresh chat, `/effort high`, paste the same prompt.
+1. `/model`, paste, note whether the answer satisfies **every** constraint.
+2. Fresh chat, `/model`, paste the same prompt.
 3. Compare: did low break something - over **$82K**, a channel 3x, not exactly one
    Experimental, or a violated dependency - or score **under 291**? Did high hit 291 and
    stay legal? The dependencies are where low effort fails most.

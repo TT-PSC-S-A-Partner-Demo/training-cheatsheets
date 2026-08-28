@@ -78,7 +78,7 @@ Common mistake: a *procedure* pushed into AGENTS.md - it burns tokens every turn
 | `/skills` | plugin / skills settings | list loaded skills |
 | `$<name>` | `$<name>` | call a skill explicitly |
 | `codex mcp add / list` · `/mcp` | MCP marketplace / settings | connect MCP, see reach |
-| `/effort high` · `Alt+.`/`Alt+,` | (depth via the plan) | reasoning effort |
+| `/model` | (depth via the plan) | reasoning effort |
 | `/status` | `/status` | tokens + what's loaded |
 | `/new` · `/compact` | `/new` | fresh context · shrink it |
 | `codex exec "..."` | `devin -p "..."` | run one non-interactive task |
