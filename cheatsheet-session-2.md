@@ -33,13 +33,13 @@ Common mistake: a *procedure* pushed into AGENTS.md - it burns tokens every turn
   - Good: "Reviews a Go diff for error wrapping and table tests. Use when asked to review a PR or check staged changes."
   - Bad: "Helps with code quality." (fires on nothing)
 - Rules: name the **trigger words** a person types; be specific about what to flag/ignore; **one skill, one job**.
-- **Test the trigger, not the steps:** 3 real requests should fire it without you naming it; if not, fix the *description* first.
+- **Test the trigger:** 3 real requests should fire it without you naming it; if not, fix the *description* first. Write the checks down in an `evals.json` next to the skill.
 - Body under **~500 lines / 5000 tokens**; push detail to `reference/` one level deep.
 - Portable: the same SKILL.md is read by Codex, Claude Code, Cursor, Gemini CLI. Install existing: `npx openskills install <owner/repo>`.
 
 ## 4. MCP
 
-- Connect: `codex mcp add <name> -- <command>` · `codex mcp list` · `/mcp` (what this session can reach).
+- Connect: `codex mcp add <name> -- <command>` · `codex mcp list` · `/mcp` (what this session can reach). *(Workshop kit needs `pip install "mcp[cli]<2"` - the server uses FastMCP from SDK 1.x.)*
 - **Scope it** in `.codex/config.toml`:
   ```toml
   [mcp_servers.jira]
